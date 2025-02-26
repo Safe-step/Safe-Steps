@@ -89,7 +89,7 @@ const WomenSafety = () => {
         </Col>
       </Row>
     </Container>
-  );
+  ); 
 };
 
 export default WomenSafety;
