@@ -4,107 +4,84 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: white;
-  overflow: hidden;
-  position: relative;
-  font-family: 'Roboto', sans-serif;
-  padding: 20px;
+  height: 100vh;
+  background: white;
+  text-align: center;
 }
 
+/* Semi-transparent overlay */
+.overlay {
+  background: rgba(255, 165, 0, 0.1); /* Light Orange Tint */
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(255, 165, 0, 0.2);
+}
+
+/* Content Styling */
+.content {
+  color: #ff8c00; /* Deep Orange */
+}
+
+/* Animated Text */
+.animated-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ff8c00;
+}
+
+/* Typing Effect */
 .typing-text {
   display: inline-block;
-  border-right: 3px solid #fff; /* Cursor effect */
-  white-space: nowrap;
-  overflow: hidden;
-  font-weight: bold;
-  font-size: 2rem;
-  animation: blinkCursor 0.8s infinite;
+  border-right: 3px solid #ff8c00; /* Blinking cursor */
+  padding-right: 5px;
+  animation: blink 0.7s infinite alternate;
 }
 
-@keyframes blinkCursor {
+@keyframes blink {
   50% {
     border-color: transparent;
   }
 }
 
-.overlay {
-  text-align: center;
-  background: rgba(255, 165, 0, 0.1);
-  padding: 50px;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  max-width: 600px;
-  width: 90%;
-}
-
-.content {
-  color: orange;
-}
-
-.animated-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2em, 4vw, 2.5em); /* Scales with screen size */
-  font-weight: 700;
-  margin-bottom: 15px;
-  letter-spacing: 1px;
-  animation: fadeInUp 1.5s ease-out;
-}
-
+/* Subtitle */
 .animated-text {
-  font-size: clamp(1em, 3vw, 1.2em);
+  font-size: 1.2rem;
+  opacity: 0.9;
   margin-bottom: 30px;
-  animation: fadeInUp 1.8s ease-out;
+  color: #444; /* Dark Grey */
 }
 
-.btn {
-  color: white;
-  background-color: #ffa200;
-  border: none;
-  padding: 14px 28px;
-  font-size: 1.1em;
-  border-radius: 6px;
+/* Animated Button */
+.animated-button {
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  border: 2px solid #ff8c00;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease;
+  background: rgb(208, 36, 36);
+  color: #ff8c00 !important;
+  box-shadow: 0 4px 10px orange;
+  font-weight: bold;
 }
 
-.btn:hover {
-  background:#de8d02 ;
-  transform: translateY(-3px);
-  color: white;
+.animated-button:hover {
+  background: #ff8c00;
+  color: white !important;;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 576px) {
+  .animated-title {
+    font-size: 2rem;
+  }
   .overlay {
+    width: 90%;
     padding: 30px;
   }
-
-  .animated-title {
-    font-size: 2em;
-  }
-
-  .animated-text {
-    font-size: 1em;
-  }
-
-  .btn {
-    width: 100%;
-    font-size: 1em;
-    padding: 12px;
-  }
 }
 
-@keyframes fadeInUp {
-  0% { 
-    opacity: 0; 
-    transform: translateY(20px); 
-  }
-  100% { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
-}
+
 
 /*registration and simgup form*/
 .form-container {
