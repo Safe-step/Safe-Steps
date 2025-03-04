@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { Button, Form, Card, FloatingLabel } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { AnimatePresence, motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 import App from "./landing";
+
+const slideAnimation = {
+  hidden: { x: "100vw", opacity: 0 },
+  visible: { x: 0, opacity: 1, transition: { type: "spring", stiffness: 50 } },
+  exit: { x: "-100vw", opacity: 0, transition: { type: "spring", stiffness: 50 } },
+};
 
 const RegistrationSignup = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [navigateToApp, setNavigateToApp] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ name: "", phone: "", email: "", password: "" });
   const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
@@ -47,18 +48,18 @@ const RegistrationSignup = () => {
   }
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-      <div className="p-4 shadow-lg bg-white rounded form-container d-flex flex-column align-items-center" style={{ width: "400px" }}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={isSignup ? "signup" : "register"}
-            initial={{ x: isSignup ? 100 : -100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: isSignup ? -100 : 100, opacity: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            <Card className="p-4 text-center border-0 w-100">
-              <h2 className="text-dark fw-bold mb-3">{isSignup ? "Sign Up" : "Register"}</h2>
+    <motion.div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+      <div className="p-4 shadow-lg bg-white rounded form-container d-flex flex-column align-items-center" style={{ width: "90%", maxWidth: "400px" }}>
+        <Card className="p-4 text-center border-0 w-100 shadow-lg rounded-3">
+          <h2 className="text-dark fw-bold mb-3">{isSignup ? "Sign Up" : "Register"}</h2>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={isSignup ? "signup" : "register"}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={slideAnimation}
+            >
               <Form className="text-start">
                 {!isSignup && (
                   <>
@@ -71,6 +72,7 @@ const RegistrationSignup = () => {
                           value={formData.name}
                           onChange={handleInputChange}
                           isInvalid={!!errors.name}
+                          className="input-field"
                         />
                         <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
                       </FloatingLabel>
@@ -90,6 +92,7 @@ const RegistrationSignup = () => {
                           }}
                           isInvalid={!!errors.phone}
                           maxLength="10"
+                          className="input-field"
                         />
                         <Form.Control.Feedback type="invalid">{errors.phone}</Form.Control.Feedback>
                       </FloatingLabel>
@@ -105,6 +108,7 @@ const RegistrationSignup = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       isInvalid={!!errors.email}
+                      className="input-field"
                     />
                     <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
                   </FloatingLabel>
@@ -118,17 +122,18 @@ const RegistrationSignup = () => {
                       value={formData.password}
                       onChange={handleInputChange}
                       isInvalid={!!errors.password}
+                      className="input-field"
                     />
                     <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
                   </FloatingLabel>
                 </Form.Group>
-                <Button variant="primary" className="w-100 mb-3 custom-btn" onClick={handleSubmit}>
+                <Button className="w-100 mb-3 custom-btn" style={{ backgroundColor: "#ff8c00", borderColor: "#ff8c00" }} onClick={handleSubmit}>
                   {isSignup ? "Sign Up" : "Register"}
                 </Button>
               </Form>
-            </Card>
-          </motion.div>
-        </AnimatePresence>
+            </motion.div>
+          </AnimatePresence>
+        </Card>
 
         <div className="d-flex flex-column w-100 mt-3 gap-2">
           <Button variant="light" className="w-100 d-flex align-items-center justify-content-center shadow-sm" onClick={handleSocialSignup}>
@@ -140,11 +145,11 @@ const RegistrationSignup = () => {
         </div>
 
         <div className="d-flex justify-content-between w-100 mt-3 gap-3">
-          <Button className="toggle-btn w-50" onClick={() => setIsSignup(false)}>Register</Button>
-          <Button className="toggle-btn w-50" onClick={() => setIsSignup(true)}>Sign Up</Button>
+        <Button className="toggle-btn w-50" style={{ backgroundColor: "#ff8c00", borderColor: "#ff8c00" }} onClick={() => setIsSignup(false)}>Register</Button>
+        <Button className="toggle-btn w-50" style={{ backgroundColor: "#ff8c00", borderColor: "#ff8c00" }} onClick={() => setIsSignup(true)}>Sign Up</Button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

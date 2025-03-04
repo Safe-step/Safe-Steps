@@ -16,6 +16,15 @@ const DonationPage = () => {
     return "😁"; // Very Happy
   };
 
+  const handleGooglePay = () => {
+    window.location.href = `upi://pay?pa=${upiId}&pn=Donation&am=${amount}&cu=INR`;
+  };
+
+  const handleRazorpay = () => {
+    // Razorpay integration logic to be added later
+    alert("Razorpay payment will be integrated here.");
+  };
+
   return (
     <div className="flex flex-col items-center justify-center gap-8 p-10 bg-gradient-to-b from-blue-100 to-blue-300 min-h-screen text-center">
       <motion.h1 
@@ -38,7 +47,7 @@ const DonationPage = () => {
           onChange={(e) => setAmount(Number(e.target.value))}
           className="w-full cursor-pointer accent-blue-600"
         />
-          <div className="text-[200px]">{getEmoji()}</div>
+        <div className="text-[200px]">{getEmoji()}</div>
       </div>
       
       <div className="flex flex-row items-center bg-white p-6 rounded-2xl shadow-lg w-96 justify-between">
@@ -47,7 +56,15 @@ const DonationPage = () => {
           <QRCode value={qrValue} size={200} className="border-2 border-blue-600 p-2 rounded-lg shadow-md" />
           <p className="text-sm text-gray-500 mt-2">UPI ID: <span className="font-semibold text-gray-700">{upiId}</span></p>
         </div>
-      
+      </div>
+
+      <div className="flex flex-row gap-4 mt-4">
+        <button onClick={handleGooglePay} className=" text-white font-bold px-6 py-3 rounded-lg shadow-md hover:bg-blue-600">
+          Pay with Google Pay
+        </button>
+        <button onClick={handleRazorpay} className=" text-white font-bold px-6 py-3 rounded-lg shadow-md ">
+          Pay with Razorpay
+        </button>
       </div>
     </div>
   );

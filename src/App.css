@@ -1,41 +1,44 @@
 /* App.css or your specific CSS file */
+/*entry page*/
+/* Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&display=swap");
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: #f7f7f7;
+  margin: 0;
+  padding: 0;
+}
 
 .entry-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
-  background: white;
   text-align: center;
 }
 
-/* Semi-transparent overlay */
+/* Overlay */
 .overlay {
-  background: rgba(255, 165, 0, 0.1); /* Light Orange Tint */
-  padding: 50px;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(255, 165, 0, 0.2);
+  background: rgba(255, 165, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(255, 165, 0, 0.3);
 }
 
-/* Content Styling */
-.content {
-  color: #ff8c00; /* Deep Orange */
-}
-
-/* Animated Text */
+/* Animated Title (Cursive) */
 .animated-title {
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-family: "Dancing Script", cursive;
+  font-size: 4rem;
+  font-weight: 700;
   margin-bottom: 20px;
   color: #ff8c00;
+  text-shadow: 2px 2px 10px rgba(255, 140, 0, 0.5);
 }
 
 /* Typing Effect */
 .typing-text {
   display: inline-block;
-  border-right: 3px solid #ff8c00; /* Blinking cursor */
-  padding-right: 5px;
-  animation: blink 0.7s infinite alternate;
+  border-right: 4px solid #ff8c00;
+  padding-right: 6px;
+  font-size: 3.5rem;
+  animation: blink 0.5s infinite alternate;
 }
 
 @keyframes blink {
@@ -46,89 +49,73 @@
 
 /* Subtitle */
 .animated-text {
-  font-size: 1.2rem;
-  opacity: 0.9;
-  margin-bottom: 30px;
-  color: #444; /* Dark Grey */
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #333;
+  line-height: 1.6;
 }
 
 /* Animated Button */
 .animated-button {
-  padding: 12px 25px;
-  font-size: 1.1rem;
-  border: 2px solid #ff8c00;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background: rgb(208, 36, 36);
-  color: #ff8c00 !important;
-  box-shadow: 0 4px 10px orange;
+  padding: 15px 35px;
+  font-size: 1.4rem;
   font-weight: bold;
+  background: #ff8c00;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 5px 15px rgba(255, 140, 0, 0.5);
 }
 
 .animated-button:hover {
-  background: #ff8c00;
-  color: white !important;;
+  transform: scale(1.1);
 }
 
-@media (max-width: 576px) {
+.animated-button:active {
+  transform: scale(0.9);
+}
+
+/* 🌟 Mobile Responsive Adjustments */
+@media (max-width: 768px) {
   .animated-title {
+    font-size: 3rem;
+  }
+
+  .typing-text {
+    font-size: 2.5rem;
+  }
+
+  .animated-text {
+    font-size: 1.2rem;
+  }
+
+  .animated-button {
+    padding: 12px 30px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .animated-title {
+    font-size: 2.5rem;
+  }
+
+  .typing-text {
     font-size: 2rem;
   }
-  .overlay {
-    width: 90%;
-    padding: 30px;
+
+  .animated-text {
+    font-size: 1rem;
+  }
+
+  .animated-button {
+    padding: 10px 25px;
+    font-size: 1rem;
   }
 }
 
-
-
-/*registration and simgup form*/
-.form-container {
-  max-width: 400px;
-  width: 100%; /* Ensure it adjusts for smaller screens */
-  border-radius: 12px;
-  padding: 20px;
-}
-
-
-.input-field {
-  border-radius: 8px;
-  padding: 10px;
-  border: 1px solid #ced4da;
-  transition: 0.3s;
-}
-
-.input-field:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.custom-btn {
-  background-color: #007bff;
-  border: none;
-  font-weight: bold;
-  border-radius: 8px;
-  padding: 10px;
-  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
-}
-
-.custom-btn:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
-}
-
-
-.toggle-btn {
-  border-radius: 8px;
-  padding: 8px 15px;
-  font-weight: bold;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.toggle-btn:hover {
-  background-color: #007bff;
-  color: white;
-}
 
 /**/
