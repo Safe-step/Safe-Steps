@@ -1,6 +1,7 @@
 import React from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
+import { FaShieldAlt, FaUsers, FaCar } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import womana from "../assets/womana.jpg";
 import RideBooking from "./ride";
@@ -10,9 +11,9 @@ const WomenSafety = () => {
     <Container className="my-5">
       <motion.h1 
         className="text-center mb-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+        initial={{ opacity: 0, rotateX: -90 }}
+        animate={{ opacity: 1, rotateX: 0 }}
+        transition={{ duration: 2, ease: "easeInOut" }}
       >
         About Us
       </motion.h1>
@@ -21,24 +22,17 @@ const WomenSafety = () => {
           <motion.img
             src={womana}
             alt="Women Safety"
-            className="img-fluid rounded w-75"
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-            whileHover={{ scale: 1.05 }}
+            className="img-fluid rounded w-75 image-3d"
           />
         </Col>
         <Col md={6} xs={12}>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
+            transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
           >
             <motion.h2 
               className="mb-3 text-center text-md-start"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1 }}
               whileHover={{ scale: 1.1 }}
             >
               Women Safety & Empowerment
@@ -47,7 +41,7 @@ const WomenSafety = () => {
               className="text-justify"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1.5 }}
+              transition={{ duration: 2, ease: "easeInOut", delay: 1 }}
             >
               Our platform is dedicated to women's safety and empowerment. We collaborate with various NGOs to provide immediate assistance. If a woman feels lonely or frightened at night, she can visit our site, and we will connect her with a nearby NGO. The NGO will ensure her safe return home.
             </motion.p>
@@ -55,7 +49,7 @@ const WomenSafety = () => {
               className="text-center text-md-start"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 2 }}
+              transition={{ duration: 2, ease: "easeInOut", delay: 1.5 }}
             >
               Main Goals
             </motion.h3>
@@ -63,31 +57,43 @@ const WomenSafety = () => {
               className="ps-3"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 2.5 }}
+              transition={{ duration: 2, ease: "easeInOut", delay: 2 }}
             >
-              <motion.li whileHover={{ scale: 1.1 }}>
+              <motion.li className="list-item-3d" initial={{ rotateY: 180 }} animate={{ rotateY: 0 }} transition={{ duration: 1.5, delay: 0.4 }} whileHover={{ scale: 1.1, color: "orange" }}>
+                <FaUsers className="me-2 text-primary" />
                 <strong>Women Empowerment:</strong> We provide educational resources, skill development programs, and career guidance to help women achieve financial independence and self-confidence.
               </motion.li>
-              <motion.li whileHover={{ scale: 1.1 }}>
+
+              <motion.li initial={{ rotateY: 180 }} animate={{ rotateY: 0 }} transition={{ duration: 1.5, delay: 0.2 }} whileHover={{ scale: 1.1, color: "orange" }}>
+                <FaShieldAlt className="me-2 text-danger" />
                 <strong>Women Safety:</strong> Our platform ensures immediate support for women in distress by connecting them to nearby NGOs and emergency services, ensuring their safety at all times.
               </motion.li>
-              <motion.li whileHover={{ scale: 1.1 }}>
+
+              <motion.li initial={{ rotateY: 180 }} animate={{ rotateY: 0 }} transition={{ duration: 1.5, delay: 0.4 }} whileHover={{ scale: 1.1, color: "orange" }}>
+                <FaCar className="me-2 text-success" />
                 <strong>Safe Ride:</strong> We offer a secure ride service where verified NGO personnel provide bike rides to women in need. Every ride operates under police surveillance. When an NGO person accepts a ride request, an OTP is generated and sent to the police station, allowing law enforcement to track the woman's location for enhanced security.
               </motion.li>
             </motion.ul>
+            
+            {/* Button to Scroll to RideBooking */}
             <motion.div className="text-center mt-4">
-              <Button 
-                variant="primary" 
-                size="lg" 
-                whileHover={{ scale: 1.1 }}
-                onClick={() => document.getElementById('RideBooking').scrollIntoView({ behavior: 'smooth' })}
+              <motion.button
+                className="btn btn-primary book-button"
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                onClick={() => document.getElementById("RideBooking").scrollIntoView({ behavior: "smooth" })}
               >
-                Book Now
-              </Button>
+                <FaCar className="car-icon me-2" />
+                <span className="button-text">Book Now</span>
+              </motion.button>
             </motion.div>
           </motion.div>
         </Col>
       </Row>
+
+      {/* Ride Booking Section */}
+      <div id="RideBooking" className="mt-5">
+        <RideBooking />
+      </div>
     </Container>
   ); 
 };

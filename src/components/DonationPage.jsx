@@ -1,72 +1,82 @@
 import React, { useState } from "react";
-import QRCode from "react-qr-code";
-import { motion } from "framer-motion";
+import { Container, Form, Button, Card } from "react-bootstrap";
+import { QRCodeCanvas } from "qrcode.react";
 
 const DonationPage = () => {
   const [amount, setAmount] = useState(100);
   const upiId = "mondalsouvik31695@okhdfcbank";
-  
-  const qrValue = `upi://pay?pa=${upiId}&pn=Donation&am=${amount}&cu=INR`;
 
-  const getEmoji = () => {
-    if (amount <= 50) return "😢"; // Sad
-    if (amount <= 100) return "😐"; // Okay
-    if (amount <= 400) return "🙂"; // Satisfied
-    if (amount <= 700) return "😊"; // Happy
-    return "😁"; // Very Happy
-  };
+  // Handle Razorpay Payment
+  const handleRazorpayPayment = () => {
+    const options = {
+      key: "rzp_test_zwUrEZLZDKkOGT",
+      amount: amount * 100, // Convert to paise
+      currency: "INR",
+      name: "Donation",
+      description: "Support the cause",
+      handler: function (response) {
+        alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+      },
+      prefill: {
+        name: "Souvik Mondal",
+        email: "mondaksouvik289@gmail.com",
+        contact: "7362949785",
+      },
+      theme: {
+        color: "#FFD700", // Updated color to gold
+      },
+    };
 
-  const handleGooglePay = () => {
-    window.location.href = `upi://pay?pa=${upiId}&pn=Donation&am=${amount}&cu=INR`;
-  };
-
-  const handleRazorpay = () => {
-    // Razorpay integration logic to be added later
-    alert("Razorpay payment will be integrated here.");
+    const rzp = new window.Razorpay(options);
+    rzp.open();
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-8 p-10 bg-gradient-to-b from-blue-100 to-blue-300 min-h-screen text-center">
-      <motion.h1 
-        className="text-4xl font-extrabold text-blue-800 drop-shadow-md"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Support the Cause
-      </motion.h1>
-      <p className="text-lg text-gray-800 font-medium">Your contribution helps us make a difference.</p>
-      
-      <div className="flex flex-col items-center bg-white p-6 rounded-2xl shadow-lg w-80">
-        <label className="text-lg font-semibold mb-2 text-gray-700">Select Donation Amount: ₹{amount}</label>
-        <input
-          type="range"
-          min="1"
-          max="1000"
-          value={amount}
-          onChange={(e) => setAmount(Number(e.target.value))}
-          className="w-full cursor-pointer accent-blue-600"
-        />
-        <div className="text-[200px]">{getEmoji()}</div>
-      </div>
-      
-      <div className="flex flex-row items-center bg-white p-6 rounded-2xl shadow-lg w-96 justify-between">
-        <div className="flex flex-col items-center">
-          <p className="text-lg font-semibold mb-2 text-gray-700">Scan to Donate via UPI</p>
-          <QRCode value={qrValue} size={200} className="border-2 border-blue-600 p-2 rounded-lg shadow-md" />
-          <p className="text-sm text-gray-500 mt-2">UPI ID: <span className="font-semibold text-gray-700">{upiId}</span></p>
-        </div>
-      </div>
+    <Container className="d-flex justify-content-center align-items-center min-vh-100">
+      <Card style={{ width: "400px", padding: "20px", borderRadius: "15px", backgroundColor: "#FFFFFF", boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)" }}>
+        <h2 className="text-center mb-4" style={{ color: "#FFD700" }}>Make a Donation</h2>
 
-      <div className="flex flex-row gap-4 mt-4">
-        <button onClick={handleGooglePay} className=" text-white font-bold px-6 py-3 rounded-lg shadow-md hover:bg-blue-600">
-          Pay with Google Pay
-        </button>
-        <button onClick={handleRazorpay} className=" text-white font-bold px-6 py-3 rounded-lg shadow-md ">
-          Pay with Razorpay
-        </button>
-      </div>
-    </div>
+        {/* Range Slider */}
+        <Form.Group className="p-2">
+          <Form.Label className="fw-bold">Donation Amount: ₹{amount}</Form.Label>
+          <Form.Range
+            min="1"
+            max="100000"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            className="animated-range"
+            style={{ accentColor: "#FFD700" }}
+          />
+        </Form.Group>
+
+        {/* QR Code */}
+        <div className="text-center mt-3">
+          <QRCodeCanvas value={`upi://pay?pa=${upiId}&pn=Souvik Mondal&am=${amount}&cu=INR`} size={150} />
+          <p className="mt-2" style={{ color: "#666" }}>Scan to Pay</p>
+        </div>
+
+        {/* Button */}
+        <div className="d-flex justify-content-center mt-3">
+          <Button 
+            style={{ 
+              backgroundColor: "#FFD700", 
+              borderColor: "#FFD700", 
+              color: "#000", 
+              fontWeight: "bold",
+              padding: "10px 20px",
+              borderRadius: "25px",
+              transition: "0.3s"
+            }} 
+            onClick={handleRazorpayPayment} 
+            className="mx-2"
+            onMouseOver={(e) => e.target.style.backgroundColor = "#FFC107"}
+            onMouseOut={(e) => e.target.style.backgroundColor = "#FFD700"}
+          >
+            Pay with Razorpay
+          </Button>
+        </div>
+      </Card>
+    </Container>
   );
 };
 

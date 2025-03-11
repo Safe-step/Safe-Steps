@@ -1,121 +1,175 @@
-/* App.css or your specific CSS file */
 /*entry page*/
-/* Google Font */
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&display=swap");
 
-body {
+
+/* About Section */
+.animated-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #de71d6;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  perspective: 800px;
   font-family: "Roboto", sans-serif;
-  background: #f7f7f7;
-  margin: 0;
-  padding: 0;
 }
 
-.entry-page {
-  height: 100vh;
-  text-align: center;
-}
-
-/* Overlay */
-.overlay {
-  background: rgba(255, 165, 0, 0.1);
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(255, 165, 0, 0.3);
-}
-
-/* Animated Title (Cursive) */
-.animated-title {
-  font-family: "Dancing Script", cursive;
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: #ff8c00;
-  text-shadow: 2px 2px 10px rgba(255, 140, 0, 0.5);
-}
-
-/* Typing Effect */
-.typing-text {
+.title-3d {
   display: inline-block;
-  border-right: 4px solid #ff8c00;
-  padding-right: 6px;
-  font-size: 3.5rem;
-  animation: blink 0.5s infinite alternate;
+  background: linear-gradient(45deg, #de71d6, #8a2be2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  transition: transform 0.3s ease-in-out;
 }
 
-@keyframes blink {
+.title-3d:hover {
+  transform: rotateX(10deg);
+}
+
+.image-3d {
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px  #FFD700; 
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.image-3d:hover {
+  transform: rotateY(10deg) scale(1.05);
+  box-shadow: 0px 15px 40px #FFD700;
+}
+
+
+
+
+.image-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-3d:hover {
+  animation: infiniteFlip 3s infinite linear;
+}
+
+/* 3D Glowing Button */
+.book-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 15px; /* Smooth rounded corners */
+  background-color:  #FFD700; /* Theme color */
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px  #FFD700;
+}
+
+.book-button:hover {
+  background-color: #FFD700;
+  transform: translateY(-2px);
+}
+
+.car-icon {
+  font-size: 20px;
+}
+
+.button-text {
+  display: inline-block;
+  position: relative;
+  transition: padding-right 0.3s ease-in-out;
+}
+
+.book-button:hover .button-text {
+  padding-right: 20px;
+}
+
+.book-button:hover .button-text::after {
+  content: " »";
+  position: absolute;
+  opacity: 1;
+  right: 0;
+  transition: 0.3s ease-in-out;
+}
+
+
+@keyframes infiniteFlip {
+  0% {
+    transform: rotateY(0deg) rotateX(0deg) scale(1);
+  }
+  25% {
+    transform: rotateY(180deg) rotateX(0deg) scale(1.05);
+  }
   50% {
-    border-color: transparent;
+    transform: rotateY(180deg) rotateX(180deg) scale(1.05);
+  }
+  75% {
+    transform: rotateY(360deg) rotateX(180deg) scale(1);
+  }
+  100% {
+    transform: rotateY(360deg) rotateX(360deg) scale(1);
   }
 }
 
-/* Subtitle */
-.animated-text {
-  font-family: "Roboto", sans-serif;
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: #333;
-  line-height: 1.6;
+
+
+/*Entry page*/
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the video covers the entire screen */
+  z-index: -1; /* Send the video to the background */
 }
 
-/* Animated Button */
-.animated-button {
-  padding: 15px 35px;
-  font-size: 1.4rem;
+
+.animated-title {
+  font-size: 2.5rem;
   font-weight: bold;
-  background: #ff8c00;
+}
+
+.animated-button {
+  background-color: #de71d1;
   color: white;
   border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
-  box-shadow: 0 5px 15px rgba(255, 140, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: 0.3s;
 }
 
 .animated-button:hover {
-  transform: scale(1.1);
+  background-color: #de71d1;
+  color: white;
 }
 
-.animated-button:active {
-  transform: scale(0.9);
+/*donation page */
+.animated-range {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
-/* 🌟 Mobile Responsive Adjustments */
-@media (max-width: 768px) {
-  .animated-title {
-    font-size: 3rem;
-  }
-
-  .typing-text {
-    font-size: 2.5rem;
-  }
-
-  .animated-text {
-    font-size: 1.2rem;
-  }
-
-  .animated-button {
-    padding: 12px 30px;
-    font-size: 1.2rem;
-  }
+.animated-range:hover {
+  transform: scale(1.05);
 }
 
-@media (max-width: 480px) {
-  .animated-title {
-    font-size: 2.5rem;
-  }
-
-  .typing-text {
-    font-size: 2rem;
-  }
-
-  .animated-text {
-    font-size: 1rem;
-  }
-
-  .animated-button {
-    padding: 10px 25px;
-    font-size: 1rem;
-  }
+.animated-range:active {
+  transform: scale(1);
 }
 
+/*partner*/
+.custom-button {
+  background-color: #FFD700;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+}
 
-/**/
+.custom-button:hover {
+  background-color: #E6C200; /* Darker Gold */
+  color: black;
+}
